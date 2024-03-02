@@ -1,4 +1,6 @@
 pandas
 numpy
 dvc
+matplotlib
+seaborn
 -e .
