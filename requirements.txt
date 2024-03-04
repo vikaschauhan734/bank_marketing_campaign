@@ -3,4 +3,6 @@ numpy
 dvc
 matplotlib
 seaborn
+scikit-learn
+imblearn
 -e .
