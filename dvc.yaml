@@ -1,0 +1,12 @@
+stages:
+  load_data:
+    cmd: python src/components/load_data.py --config=params.yaml
+    deps:
+    - src/components/get_data.py
+    - src/components/load_data.py
+    - src/utils/balance_data.py
+    - src/utils/data_concat.py
+    - src/utils/clean_col.py
+    - data_given/bank-additional-full.csv
+    outs:
+    - data/raw/bank_cleaned.csv

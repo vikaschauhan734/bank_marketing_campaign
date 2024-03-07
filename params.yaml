@@ -1,0 +1,37 @@
+base:
+  project: bank-marketing-campaign-project
+  random_state: 42
+  target_col: y
+
+data_source:
+  s3_source: data_given/bank-additional-full.csv
+
+load_data:
+  raw_dataset_csv: data/raw/bank_cleaned.csv
+
+split_data:
+  train_path: data/processed/train_bank_marketing.csv
+  test_path: data/processed/test_bank_marketing.csv
+  test_size: 0.2
+
+estimators:
+  RandomForestClassifier:
+    params:
+      n_estimators: 31
+      max_depth: 13
+      min_samples_split: 4
+      min_samples_leaf: 3
+model_dir: saved_models
+
+reports:
+  params: report/params.json
+  scores: report/scores.json
+
+webapp_model_dir: prediction_service/model/model.pkl
+
+mlflow_config:
+  artifacts_dir: artifacts
+  experiment_name: Random Forest Classifier
+  run_name: mlops
+  registered_model_name: RandomForestBankModel
+  remote_server_uri: http://0.0.0.0:1234

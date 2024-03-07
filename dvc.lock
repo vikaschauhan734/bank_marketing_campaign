@@ -1,0 +1,34 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/components/load_data.py --config=params.yaml
+    deps:
+    - path: data_given/bank-additional-full.csv
+      hash: md5
+      md5: 59dac8714096285d57a8f1b500c37c8a
+      size: 5834924
+    - path: src/components/get_data.py
+      hash: md5
+      md5: d37599e6666de802c0b93401d9f77e82
+      size: 643
+    - path: src/components/load_data.py
+      hash: md5
+      md5: 491585c50da67ea23f3761ad3725eb35
+      size: 1130
+    - path: src/utils/balance_data.py
+      hash: md5
+      md5: c44211624e67266ab9a5e961275906cb
+      size: 666
+    - path: src/utils/clean_col.py
+      hash: md5
+      md5: 22583afe891b04313c7f0748ecdb373a
+      size: 339
+    - path: src/utils/data_concat.py
+      hash: md5
+      md5: 26b12e8078d4f2a4b1d0b27fdca7e9b3
+      size: 292
+    outs:
+    - path: data/raw/bank_cleaned.csv
+      hash: md5
+      md5: 670c13f8cee178f619d0b58e34a03fea
+      size: 9854928

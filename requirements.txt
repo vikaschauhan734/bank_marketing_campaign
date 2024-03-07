@@ -1,6 +1,7 @@
 pandas
 numpy
 dvc
+dvc[gdrive]
 matplotlib
 seaborn
 scikit-learn
