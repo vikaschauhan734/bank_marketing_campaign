@@ -1,5 +1,5 @@
 # balancing the values of target value
-from src.components.get_data import read_params, get_data
+from src.components.get_data import read_params
 import argparse
 from imblearn.over_sampling import SMOTE
 

@@ -17,8 +17,8 @@ stages:
       size: 1130
     - path: src/utils/balance_data.py
       hash: md5
-      md5: c44211624e67266ab9a5e961275906cb
-      size: 666
+      md5: 717ad8485dce2ab86491755f11a84567
+      size: 656
     - path: src/utils/clean_col.py
       hash: md5
       md5: 22583afe891b04313c7f0748ecdb373a
@@ -30,5 +30,67 @@ stages:
     outs:
     - path: data/raw/bank_cleaned.csv
       hash: md5
-      md5: 670c13f8cee178f619d0b58e34a03fea
-      size: 9854928
+      md5: 1c92d903cb8098a2d10b4dab24b3c66e
+      size: 9855636
+  split_data:
+    cmd: python src/components/split_data.py --config=params.yaml
+    deps:
+    - path: data/raw/bank_cleaned.csv
+      hash: md5
+      md5: 1c92d903cb8098a2d10b4dab24b3c66e
+      size: 9855636
+    - path: src/components/get_data.py
+      hash: md5
+      md5: d37599e6666de802c0b93401d9f77e82
+      size: 643
+    - path: src/components/split_data.py
+      hash: md5
+      md5: 1dcff2f8709e4ce4edfda4fb65cebfb7
+      size: 1119
+    outs:
+    - path: data/processed/test_bank_marketing.csv
+      hash: md5
+      md5: 70759ac23afa2408f6276d98049d01c7
+      size: 1972161
+    - path: data/processed/train_bank_marketing.csv
+      hash: md5
+      md5: 0a4656a03d5af041fa26e16e9a2fd6d2
+      size: 7877458
+  train_and_evaluate:
+    cmd: python src/components/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_bank_marketing.csv
+      hash: md5
+      md5: 70759ac23afa2408f6276d98049d01c7
+      size: 1972161
+    - path: data/processed/train_bank_marketing.csv
+      hash: md5
+      md5: 0a4656a03d5af041fa26e16e9a2fd6d2
+      size: 7877458
+    - path: src/components/get_data.py
+      hash: md5
+      md5: d37599e6666de802c0b93401d9f77e82
+      size: 643
+    - path: src/components/train_and_evaluate.py
+      hash: md5
+      md5: bd2aacacc7400de1f79e85e9d81ca525
+      size: 3022
+    params:
+      params.yaml:
+        estimators.RandomForestClassifier.params.max_depth: 13
+        estimators.RandomForestClassifier.params.min_samples_leaf: 3
+        estimators.RandomForestClassifier.params.min_samples_split: 4
+        estimators.RandomForestClassifier.params.n_estimators: 31
+    outs:
+    - path: reports/params.json
+      hash: md5
+      md5: b44b2fe430346f0059c271d49d25a9c4
+      size: 107
+    - path: reports/scores.json
+      hash: md5
+      md5: 919d6da1ba25295b4dbe555bd3659fa0
+      size: 143
+    - path: saved_models/model.pkl
+      hash: md5
+      md5: fdee81b36d484d1423c68045d70e96e0
+      size: 4740373

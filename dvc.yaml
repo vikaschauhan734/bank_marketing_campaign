@@ -10,3 +10,33 @@ stages:
     - data_given/bank-additional-full.csv
     outs:
     - data/raw/bank_cleaned.csv
+  
+  split_data:
+    cmd: python src/components/split_data.py --config=params.yaml
+    deps:
+    - src/components/get_data.py
+    - src/components/split_data.py
+    - data/raw/bank_cleaned.csv
+    outs:
+    - data/processed/train_bank_marketing.csv
+    - data/processed/test_bank_marketing.csv
+
+  train_and_evaluate:
+    cmd: python src/components/train_and_evaluate.py --config=params.yaml
+    deps:
+    - src/components/get_data.py
+    - src/components/train_and_evaluate.py
+    - data/processed/train_bank_marketing.csv
+    - data/processed/test_bank_marketing.csv
+    params:
+    - estimators.RandomForestClassifier.params.n_estimators
+    - estimators.RandomForestClassifier.params.max_depth
+    - estimators.RandomForestClassifier.params.min_samples_split
+    - estimators.RandomForestClassifier.params.min_samples_leaf
+    metrics:
+    - reports/scores.json:
+        cache: false
+    - reports/params.json:
+        cache: false
+    outs:
+    - saved_models/model.pkl
