@@ -1,0 +1,4 @@
+[core]
+    remote = bank_marketing
+['remote "bank_marketing"']
+    url = https://drive.google.com/drive/folders/1jJpB7mQmkGnWEJ64or2hSSJpSZJGMwQZ?usp=drive_link

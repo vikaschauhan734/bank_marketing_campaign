@@ -45,11 +45,11 @@ def train_and_evaluate(config_path):
     y_pred = model.predict(X_test)
 
     (acc, pre, rec, f1) = eval_metrics(y_test,y_pred)
-    print(f"Random forest classifier model: n_estimators={n_estimators}, max_depth={max_depth}, min_samples_split={min_samples_split}, min_samples_leaf={min_samples_leaf}")
-    print(f"Accuracy score: {acc}")
-    print(f"Precision score: {pre}")
-    print(f"Recall score: {rec}")
-    print(f"f1 score: {f1}")
+    # print(f"Random forest classifier model: n_estimators={n_estimators}, max_depth={max_depth}, min_samples_split={min_samples_split}, min_samples_leaf={min_samples_leaf}")
+    # print(f"Accuracy score: {acc}")
+    # print(f"Precision score: {pre}")
+    # print(f"Recall score: {rec}")
+    # print(f"f1 score: {f1}")
 
     with open(scores_file, "a") as f:
         scores = {
