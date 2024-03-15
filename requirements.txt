@@ -8,4 +8,5 @@ scikit-learn
 imblearn
 pytest
 tox
+dill
 -e .
