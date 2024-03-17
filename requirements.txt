@@ -5,6 +5,7 @@ dvc[gdrive]
 matplotlib
 seaborn
 scikit-learn
+xgboost
 imblearn
 pytest
 tox

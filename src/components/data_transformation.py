@@ -48,8 +48,8 @@ class DataTransformation:
                 steps=[
                     ("cat_cleaner",cat_cleaner),
                     ("imputer",SimpleImputer(strategy="most_frequent")),
-                    ("one_hot_encoder",OneHotEncoder()),
-                    ("scaler",StandardScaler(with_mean=False))
+                    ("one_hot_encoder",OneHotEncoder(drop='first')),
+                    #("scaler",StandardScaler(with_mean=False))
                 ]
             )
             logging.info(f"Categorical columns: {categorical_columns}")
@@ -78,7 +78,7 @@ class DataTransformation:
             logging.info("Applying preprocessing object on training dataframe and testing dataframe.")
 
             train_arr = preprocessing_obj.fit_transform(train_df)
-            test_arr = preprocessing_obj.fit_transform(test_df)
+            test_arr = preprocessing_obj.transform(test_df)
 
             logging.info("Saved preprocessing object.")
 
