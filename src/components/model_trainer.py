@@ -49,10 +49,10 @@ class ModelTrainer:
 
             params={
                 "Logistic Regression": {
-                    'penalty':['l1','l2','elasticnet']
+                    'penalty':['l2']
                 },
                 "SVC":{
-                    'kernel':['linear','poly','rbf','sigmoid','precomputed'],
+                    'kernel':['linear','poly','rbf','sigmoid'],
                     'gamma':['scale','auto']
                 },
                 "K-Neighbors Classifier":{

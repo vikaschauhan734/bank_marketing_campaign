@@ -8,6 +8,7 @@ import pandas as pd
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import fbeta_score,accuracy_score, precision_score,recall_score,f1_score
+from src.logger import logging
 
 
 def save_object(file_path, obj):
@@ -35,9 +36,15 @@ def evaluate_models(X_train,y_train,X_test,y_test, models, params):
 
         for i in range(len(list(models))):
             model = list(models.values())[i]
-            param=params[(list(model.keys()))[i]]
+            param=params[(list(models.keys()))[i]]
             gs = GridSearchCV(model,param,cv=5)
             gs.fit(X_train, y_train)
+            para = {}
+            para['params'] = gs.cv_results_['params']
+            para['mean_test_score'] = gs.cv_results_['mean_test_score']
+            para['rank_test_score'] = gs.cv_results_['rank_test_score']
+
+            logging.info(f"{model}: {para}")
 
             model.set_params(**gs.best_params_)
             model.fit(X_train, y_train)
@@ -55,8 +62,9 @@ def evaluate_models(X_train,y_train,X_test,y_test, models, params):
             train_model_score = fbeta_score(y_train, y_train_pred,beta=2)
             test_model_score = fbeta_score(y_test, y_test_pred,beta=2)
             report[list(models.keys())[i]] = test_model_score
-            score[list(models.keys())[i]] = {"train":{"acccuracy":train_acc,"precision":train_pre,"recall":train_re,"f1":train_f1,"fbeta":train_model_score},
-                                             "test":{"acccuracy":test_acc,"precision":test_pre,"recall":test_re,"f1":test_f1,"fbeta":test_model_score}}
+            score[list(models.keys())[i]] = {"params":gs.best_params_,
+                                            "train":{"acccuracy":round(train_acc,5),"precision":round(train_pre,5),"recall":round(train_re,5),"f1":round(train_f1,5),"fbeta":round(train_model_score,5)},
+                                             "test":{"acccuracy":round(test_acc,5),"precision":round(test_pre,5),"recall":round(test_re,5),"f1":round(test_f1,5),"fbeta":round(test_model_score,5)}}
         score_file = os.path.join("artifacts","score.json")
         with open(score_file,"w") as f:
             json.dump(score, f, indent=4)
