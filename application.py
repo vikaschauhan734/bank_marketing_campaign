@@ -4,14 +4,11 @@ import pandas as pd
 
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-# Route for a homepage
-@app.route('/')
-def index():
-    return render_template('index.html')
+app = application
 
-@app.route('/prediction',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def predict_datapoint():
     if request.method=='GET':
         return render_template('home.html')
@@ -51,4 +48,4 @@ def predict_datapoint():
     
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0",debug=True)
+    app.run(host="0.0.0.0")
