@@ -1,35 +1,52 @@
-## End-to-End Bank Marketing Campaign Machine Learning Project
+# End-to-End Bank Marketing Campaign Machine Learning Project
 
-##### About the data
-1 - age (numeric)
-2 - job : type of job (categorical: "admin.","blue-collar","entrepreneur","housemaid","management","retired","self-employed","services","student","technician","unemployed","unknown")
-3 - marital : marital status (categorical: "divorced","married","single","unknown"; note: "divorced" means divorced or widowed)
-4 - education (categorical: "basic.4y","basic.6y","basic.9y","high.school","illiterate","professional.course","university.degree","unknown")
-5 - default: has credit in default? (categorical: "no","yes","unknown")
-6 - housing: has housing loan? (categorical: "no","yes","unknown")
-7 - loan: has personal loan? (categorical: "no","yes","unknown")
+## Overview
+This project aims to predict whether clients will subscribe to a term deposit in a bank marketing campaign. It utilizes machine learning techniques on a dataset containing various client attributes, previous campaign history, and economic indicators.
 
-related with the last contact of the current campaign:
-8 - contact: contact communication type (categorical: "cellular","telephone")
-9 - month: last contact month of year (categorical: "jan", "feb", "mar", …, "nov", "dec")
-10 - day_of_week: last contact day of the week (categorical: "mon","tue","wed","thu","fri")
-11 - duration: last contact duration, in seconds (numeric).
-12 - campaign: number of contacts performed during this campaign and for this client (numeric, includes last contact)
-13 - pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously contacted)
-14 - previous: number of contacts performed before this campaign and for this client (numeric)
-15 - poutcome: outcome of the previous marketing campaign (categorical: "failure","nonexistent","success")
+## Features
+- Age
+- Job
+- Marital status
+- Education level
+- Credit default status
+- Housing loan status
+- Personal loan status
+- Contact communication type
+- Last contact month of the year
+- Last contact day of the week
+- Last contact duration (seconds)
+- Number of contacts performed during this campaign
+- Number of days since the client was last contacted
+- Number of contacts performed before this campaign
+- Outcome of the previous marketing campaign
+- Economic indicators: employment variation rate, consumer price index, consumer confidence index, euribor 3 month rate, number of employees
 
-"failure": This category indicates that the outcome of the previous marketing campaign was unsuccessful. It means that the customer did not respond positively to the previous marketing efforts, such as not purchasing a product, not subscribing to a service, or not showing interest in the campaign.
+## Project Structure
+- `notebooks/`: Contains Jupyter notebooks for exploratory data analysis (EDA), data cleaning, and model training.
+- `src/`: Contains modular code for data ingestion, transformation, and model training.
+- `app`: Flask web application for interacting with the trained model.
+- `Dockerfile`: Defines Docker image configuration for containerization.
+- `requirements.txt`: Lists dependencies required for the project.
+- `README.md`: Overview and instructions for running the project.
 
-"nonexistent": This category suggests that there was no previous marketing campaign targeted at the customer or that there was no record of the customer's response to the previous campaign. It could imply that the customer was not contacted or engaged in the previous campaign.
+## Usage
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Install dependencies: `pip install -r requirements.txt`.
+4. Run the Flask web application: `python app.py`.
+5. Access the web application in your browser.
 
-"success": This category indicates that the outcome of the previous marketing campaign was successful. It implies that the customer responded positively to the previous marketing efforts, such as making a purchase, subscribing to a service, or showing interest in the campaign.
+## Deployment
+- Dockerize the project: `docker build -t bank-marketing-prediction .`.
+- Run the Docker container: `docker run -p 8080:8080 bank-marketing-prediction`.
+- Access the Flask web application at `http://localhost:8080`.
 
-16 - emp.var.rate: employment variation rate - quarterly indicator (numeric)
-17 - cons.price.idx: consumer price index - monthly indicator (numeric)
-18 - cons.conf.idx: consumer confidence index - monthly indicator (numeric)
-19 - euribor3m: euribor 3 month rate - daily indicator (numeric)
-20 - nr.employed: number of employees - quarterly indicator (numeric)
+## Contributor
+- [Vikas Chauhan](https://github.com/vikaschauhan734)
 
-Output variable (desired target):
-21 - y - has the client subscribed a term deposit? (binary: "yes","no")
+## Acknowledgements
+- Dataset Source: [Bank Marketing Campaign Dataset](https://www.kaggle.com/datasets/muhammedabdelrasoul/bank-marketing/data)
+
+## Images
+![1.png](1.png)
+![2.png](2.png)
